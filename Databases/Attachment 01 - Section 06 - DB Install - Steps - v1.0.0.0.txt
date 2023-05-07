@@ -1,0 +1,42 @@
+01. ssh 104.237.132.227
+02. sudo su – root
+	a. grep MemTotal /proc/meminfo
+	b. grep SwapTotal /proc/meminfo
+	c. df -h /tmp
+	d. free
+	e. uname -m
+	f. who -r 
+	g. yum install binutils* compat* gcc* glibc* ksh libaio* libstdc* libXi* libXtst* pam sysstat* unixODBC* 
+	h. group add oracle
+	i. group add dba
+	j. useradd -g oracle -G dba oracle
+	k. passwd oracle
+	l. vi /etc/security/limits.conf
+		oracle	soft	nofile	4096
+		oracle	hard	nofile	65536
+		oracle	soft	nproc	2048
+		oracle	hard	nproc	16384
+		oracle	soft	stack	10240
+		oracle	hard	stack	32768
+	m. esc --> :wq!
+	n. mkdir /ORACLE/database/app
+	o. mkdir /ORACLE/INSTALL-FILES/database
+	p. chown -R oracle:oracle /ORACLE
+	q. chmod -R 775 /ORACLE
+	r. sudo su – oracle
+	s. vi ./bash_profile
+		export TMP=/tmp/
+		export TMPDIR=/tmp/
+	t. esc --> :wq!
+03. sudo su - oracle
+	a. unzip /ORACLE/INSTALL-FILES/linuxx64_12201_database.zip .
+	b. chmod 700 /ORACLE/INSTALL-FILES/database/response/db_install.rsp
+	c. vi /ORACLE/INSTALL-FILES/database/response/db_install.rsp
+		(See Attachment)
+	d. cd /ORACLE/INSTALL-FILES/database
+		./runInstaller -silent -responseFile /ORACLE/INSTALL-FILES/database/response/db_install.rsp
+	e. vi /home/oracle/.bashrc
+		export ORACLE_HOME=/ORACLE/database/app/oracle/product/12.2.0.1/db_1
+		export ORACLE_BASE=/ORACLE/database/app/oracle
+		export PATH=$ORACLE_HOME/bin:$PATH
+	f. esc --> :wq!
